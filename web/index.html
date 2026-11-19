@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>粒度登记 · 加工执行 · 差异分析 联动控制台</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header>
+  <h1>三粒度加工与差异分析控制台</h1>
+  <div class="sub">订单 / 订单行 / 分摊 —— 粒度登记、加工执行器、差异分析服务联动；不靠事后去重隐藏错误关联</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="registry">① 粒度登记</button>
+  <button class="tab" data-tab="data">② 数据浏览</button>
+  <button class="tab" data-tab="run">③ 计算路径对比</button>
+  <button class="tab" data-tab="diagnosis">④ 差异诊断</button>
+  <button class="tab" data-tab="jobs">⑤ 任务历史(只增)</button>
+</nav>
+
+<main>
+  <!-- ① 粒度登记 -->
+  <section id="tab-registry" class="panel active">
+    <div class="grid-2">
+      <div>
+        <h2>表与粒度登记</h2>
+        <div id="table-meta"></div>
+      </div>
+      <div>
+        <h2>维度关系（可修改）</h2>
+        <div class="toolbar">
+          <label class="switch"><input type="checkbox" id="scn-dup"> 故障：产品维度重复行</label>
+          <label class="switch"><input type="checkbox" id="scn-weight"> 故障：分摊权重不完整</label>
+        </div>
+        <div id="rel-meta"></div>
+        <h3>关系变更审计</h3>
+        <div id="rel-audit"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ② 数据浏览 -->
+  <section id="tab-data" class="panel">
+    <h2>业务数据（三种粒度 + 维度/桥接）</h2>
+    <div class="toolbar" id="data-picker"></div>
+    <div id="data-table"></div>
+  </section>
+
+  <!-- ③ 计算路径对比 -->
+  <section id="tab-run" class="panel">
+    <h2>选择报表并对比三种计算路径</h2>
+    <div class="toolbar">
+      <select id="report-select"></select>
+      <button id="btn-run" class="primary">运行三路径分析</button>
+    </div>
+    <div id="report-desc" class="desc"></div>
+    <div id="path-summary"></div>
+    <div id="path-results"></div>
+  </section>
+
+  <!-- ④ 差异诊断 -->
+  <section id="tab-diagnosis" class="panel">
+    <h2>差异分析：放大 / 丢失 / 重复贡献定位</h2>
+    <div id="diagnosis-box" class="muted">请先在「计算路径对比」运行报表。</div>
+    <div id="rebuild-box"></div>
+  </section>
+
+  <!-- ⑤ 任务历史 -->
+  <section id="tab-jobs" class="panel">
+    <h2>任务历史（只增表，旧任务不可覆盖）</h2>
+    <div class="toolbar"><button id="btn-refresh-jobs">刷新</button></div>
+    <div id="jobs-box"></div>
+  </section>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
